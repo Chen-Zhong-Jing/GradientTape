@@ -141,6 +141,7 @@ numUpdates = int(x_train.shape[0] / batch_size)
 loss = []
 acc = []
 data_quantity = []
+epochStart = time.time()
 for epoch in range(epoch_num):
     # show the current epoch number
     # loop over the data in batch size increments
@@ -148,7 +149,6 @@ for epoch in range(epoch_num):
     #gamma = adjust_gamma(epoch)
     a0 = []
     l0 = []
-    epochStart = time.time()
     quantity = 0
     for x_batch, y_batch, t in iterate_minibatches(x_train, y_train, batchsize=batch_size, shuffle=True):
         grads_list = []
@@ -168,7 +168,7 @@ for epoch in range(epoch_num):
     data_quantity.append(quantity)
 
 epochEnd = time.time()
-lapsed = (epochEnd - epochStar  t) / 60.0
+elapsed = (epochEnd - epochStart) / 60.0
 print("took {:.4} minutes".format(elapsed))
 
 overall_acc = np.asarray(acc).flatten()
